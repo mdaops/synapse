@@ -47,6 +47,7 @@ func (r *SetupReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl
 
 	logger.Info("Reconciling Setup")
 	logger.Info("Trigger CI")
+	logger.Info("Misc")
 
 	return ctrl.Result{}, nil
 }
