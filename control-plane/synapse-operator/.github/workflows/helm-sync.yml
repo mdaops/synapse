@@ -1,0 +1,48 @@
+name: Sync Helm CRDs
+
+on:
+  push:
+    paths:
+      - 'control-plane/synapse-operator/api/**'
+      - 'control-plane/synapse-operator/config/crd/**'
+  pull_request:
+    paths:
+      - 'control-plane/synapse-operator/api/**'
+      - 'control-plane/synapse-operator/config/crd/**'
+
+jobs:
+  sync-helm-crds:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.22'
+        
+    - name: Generate CRDs and sync to Helm
+      run: |
+        cd control-plane/synapse-operator
+        make manifests
+        
+    - name: Check for changes
+      id: verify-changed-files
+      run: |
+        if [ -n "$(git status --porcelain)" ]; then
+          echo "changed=true" >> $GITHUB_OUTPUT
+          git status --porcelain
+        else
+          echo "changed=false" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Commit changes
+      if: steps.verify-changed-files.outputs.changed == 'true'
+      run: |
+        git config user.name 'github-actions[bot]'
+        git config user.email 'github-actions[bot]@users.noreply.github.com'
+        git add .
+        git commit -m "chore: sync Helm chart CRDs with operator CRDs"
+        git push

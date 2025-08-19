@@ -1,0 +1,23 @@
+# permissions for end users to view setups.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: synapse-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: setup-viewer-role
+rules:
+- apiGroups:
+  - synapse.io
+  resources:
+  - setups
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - synapse.io
+  resources:
+  - setups/status
+  verbs:
+  - get

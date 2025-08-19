@@ -1,0 +1,78 @@
+replicaCount: 1
+
+image:
+  registry: ghcr.io
+  repository: mdaops/synapse
+  tag: v0.0.1
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  runAsNonRoot: true
+  # runAsUser: 65532
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  # runAsUser: 65532
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 128Mi
+  requests:
+    cpu: 10m
+    memory: 64Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Leader election configuration
+leaderElection:
+  enabled: true
+
+# Health probe configuration
+healthProbe:
+  port: 8081
+  livenessProbe:
+    initialDelaySeconds: 15
+    periodSeconds: 20
+    path: /healthz
+  readinessProbe:
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    path: /readyz
+
+# Metrics configuration
+metrics:
+  enabled: true
+  port: 8080
+  service:
+    create: true
+    annotations: {}
+
+# RBAC configuration
+rbac:
+  create: true
+
+# CRD installation
+crds:
+  install: true

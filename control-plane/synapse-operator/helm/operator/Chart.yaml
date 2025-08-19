@@ -1,0 +1,17 @@
+apiVersion: v2
+name: synapse-operator
+description: A Helm chart for the Synapse Kubernetes operator
+version: 0.0.1
+appVersion: v0.0.1
+home: https://github.com/mdaops/synapse
+sources:
+  - https://github.com/mdaops/synapse
+maintainers:
+  - name: Synapse Team
+    email: team@synapse.io
+keywords:
+  - operator
+  - synapse
+  - kubernetes
+  - platform
+type: application

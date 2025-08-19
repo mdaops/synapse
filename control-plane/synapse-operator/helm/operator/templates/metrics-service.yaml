@@ -1,0 +1,22 @@
+{{- if and .Values.metrics.enabled .Values.metrics.service.create -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "synapse-operator.fullname" . }}-metrics-service
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "synapse-operator.labels" . | nindent 4 }}
+  {{- with .Values.metrics.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  ports:
+  - name: https
+    port: {{ .Values.metrics.port }}
+    protocol: TCP
+    targetPort: metrics
+  selector:
+    {{- include "synapse-operator.selectorLabels" . | nindent 4 }}
+    control-plane: controller-manager
+{{- end }}
