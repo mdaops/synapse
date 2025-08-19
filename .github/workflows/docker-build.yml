@@ -52,11 +52,10 @@ jobs:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         tags: |
           type=ref,event=tag
-          type=sha,enable={{is_default_branch}}
+          type=sha,prefix=,enable={{is_default_branch}}
           type=raw,value=latest,enable={{is_default_branch}}
           
     - name: Build and push Docker image
       run: |
         cd control-plane/synapse-operator
-        IMG=$(echo "${{ steps.meta.outputs.tags }}" | head -n1)
-        make docker-build docker-push IMG="$IMG"
+        make docker-build docker-push IMG='${{ fromJSON(steps.meta.outputs.json).tags[0] }}'
