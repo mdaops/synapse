@@ -2,4 +2,6 @@
 resources:
 - v1alpha1_setup.yaml
 - _v1alpha1_setup.yaml
+- v1alpha1_test.yaml
+- _v1alpha1_test.yaml
 # +kubebuilder:scaffold:manifestskustomizesamples
