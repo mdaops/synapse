@@ -37,7 +37,11 @@ jobs:
       uses: actions/setup-go@v5
       with:
         go-version: '1.22'
-        
+
+    - name: Vet
+      run: make vet 
+      working-directory: control-plane/synapse-operator
+
     - name: Log in to Container Registry
       uses: docker/login-action@v3
       with:
@@ -56,6 +60,6 @@ jobs:
           type=raw,value=latest,enable={{is_default_branch}}
           
     - name: Build and push Docker image
+      working-directory: control-plane/synapse-operator
       run: |
-        cd control-plane/synapse-operator
         make docker-build docker-push IMG='${{ fromJSON(steps.meta.outputs.json).tags[0] }}'
