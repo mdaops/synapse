@@ -58,4 +58,5 @@ jobs:
     - name: Build and push Docker image
       run: |
         cd control-plane/synapse-operator
-        make docker-build docker-push IMG=${{ steps.meta.outputs.tags }}
+        IMG=$(echo "${{ steps.meta.outputs.tags }}" | head -n1)
+        make docker-build docker-push IMG="$IMG"
