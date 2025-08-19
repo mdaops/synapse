@@ -27,7 +27,6 @@ import (
 	synapseiov1alpha1 "github.com/mdaops/synapse/api/v1alpha1"
 )
 
-// SetupReconciler reconciles a Setup object
 type SetupReconciler struct {
 	client.Client
 	Scheme *runtime.Scheme
@@ -47,14 +46,13 @@ type SetupReconciler struct {
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.19.0/pkg/reconcile
 func (r *SetupReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-	_ = log.FromContext(ctx)
+	logger := log.FromContext(ctx)
 
-	// TODO(user): your logic here
+	logger.Info("Reconciling Setup")
 
 	return ctrl.Result{}, nil
 }
 
-// SetupWithManager sets up the controller with the Manager.
 func (r *SetupReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		For(&synapseiov1alpha1.Setup{}).
