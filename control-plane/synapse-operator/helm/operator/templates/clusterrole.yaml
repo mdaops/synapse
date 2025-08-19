@@ -1,0 +1,21 @@
+{{- if .Values.rbac.create -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "synapse-operator.fullname" . }}-manager-role
+  labels:
+    {{- include "synapse-operator.labels" . | nindent 4 }}
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["synapse.io"]
+  resources: ["setups"]
+  verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
+- apiGroups: ["synapse.io"]
+  resources: ["setups/finalizers"]
+  verbs: ["update"]
+- apiGroups: ["synapse.io"]
+  resources: ["setups/status"]
+  verbs: ["get", "patch", "update"]
+{{- end }}
