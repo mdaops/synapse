@@ -179,11 +179,11 @@ ifndef ignore-not-found
 endif
 
 .PHONY: helm-sync
-helm-sync: ## Sync CRDs from operator to Helm chart
+helm-sync:
 	@echo "Syncing CRDs to Helm chart..."
-	@mkdir -p ../../helm/operator/crds
-	@cp config/crd/bases/*.yaml ../../helm/operator/crds/
-	@echo "✓ CRDs synced to helm/operator/crds/"
+	@mkdir -p ./helm/operator/crds
+	@cp config/crd/bases/*.yaml ./helm/operator/crds/
+	@echo "✓ CRDs synced to ./helm/operator/crds/"
 
 .PHONY: install
 install: manifests kustomize ## Install CRDs into the K8s cluster specified in ~/.kube/config.
@@ -276,7 +276,7 @@ endif
 endif
 
 .PHONY: bundle
-bundle: manifests kustomize operator-sdk ## Generate bundle manifests and metadata, then validate generated files.
+bundle: manifests kustomize operator-sdk
 	$(OPERATOR_SDK) generate kustomize manifests -q
 	cd config/manager && $(KUSTOMIZE) edit set image controller=$(IMG)
 	$(KUSTOMIZE) build config/manifests | $(OPERATOR_SDK) generate bundle $(BUNDLE_GEN_FLAGS)
