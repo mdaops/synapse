@@ -6,4 +6,6 @@ resources:
 - _v1alpha1_test.yaml
 - v1alpha1_instance.yaml
 - _v1alpha1_instance.yaml
+- v1alpha1_testinstance.yaml
+- _v1alpha1_testinstance.yaml
 # +kubebuilder:scaffold:manifestskustomizesamples

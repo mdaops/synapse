@@ -22,6 +22,8 @@ resources:
 # default, aiding admins in cluster management. Those roles are
 # not used by the Project itself. You can comment the following lines
 # if you do not want those helpers be installed with your Project.
+- testinstance_editor_role.yaml
+- testinstance_viewer_role.yaml
 - instance_editor_role.yaml
 - instance_viewer_role.yaml
 - test_editor_role.yaml

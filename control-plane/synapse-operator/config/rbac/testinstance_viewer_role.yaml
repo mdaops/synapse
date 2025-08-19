@@ -1,0 +1,23 @@
+# permissions for end users to view testinstances.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: synapse-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: testinstance-viewer-role
+rules:
+- apiGroups:
+  - synapse.io
+  resources:
+  - testinstances
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - synapse.io
+  resources:
+  - testinstances/status
+  verbs:
+  - get

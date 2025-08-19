@@ -1,13 +1,16 @@
----
+# permissions for end users to edit testinstances.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: manager-role
+  labels:
+    app.kubernetes.io/name: synapse-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: testinstance-editor-role
 rules:
 - apiGroups:
   - synapse.io
   resources:
-  - setups
+  - testinstances
   verbs:
   - create
   - delete
@@ -19,14 +22,6 @@ rules:
 - apiGroups:
   - synapse.io
   resources:
-  - setups/finalizers
-  verbs:
-  - update
-- apiGroups:
-  - synapse.io
-  resources:
-  - setups/status
+  - testinstances/status
   verbs:
   - get
-  - patch
-  - update

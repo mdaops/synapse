@@ -5,6 +5,7 @@ resources:
 - bases/synapse.io_setups.yaml
 - bases/synapse.io_tests.yaml
 - bases/synapse.io_instances.yaml
+- bases/synapse.io_testinstances.yaml
 # +kubebuilder:scaffold:crdkustomizeresource
 
 patches:
@@ -17,6 +18,7 @@ patches:
 #- path: patches/cainjection_in_setups.yaml
 #- path: patches/cainjection_in_tests.yaml
 #- path: patches/cainjection_in_instances.yaml
+#- path: patches/cainjection_in_testinstances.yaml
 # +kubebuilder:scaffold:crdkustomizecainjectionpatch
 
 # [WEBHOOK] To enable webhook, uncomment the following section

@@ -23,17 +23,17 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-// InstanceSpec defines the desired state of Instance
-type InstanceSpec struct {
+// TestInstanceSpec defines the desired state of TestInstance
+type TestInstanceSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of Instance. Edit instance_types.go to remove/update
+	// Foo is an example field of TestInstance. Edit testinstance_types.go to remove/update
 	Foo string `json:"foo,omitempty"`
 }
 
-// InstanceStatus defines the observed state of Instance
-type InstanceStatus struct {
+// TestInstanceStatus defines the observed state of TestInstance
+type TestInstanceStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 }
@@ -41,24 +41,24 @@ type InstanceStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// Instance is the Schema for the instances API
-type Instance struct {
+// TestInstance is the Schema for the testinstances API
+type TestInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   InstanceSpec   `json:"spec,omitempty"`
-	Status InstanceStatus `json:"status,omitempty"`
+	Spec   TestInstanceSpec   `json:"spec,omitempty"`
+	Status TestInstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// InstanceList contains a list of Instance
-type InstanceList struct {
+// TestInstanceList contains a list of TestInstance
+type TestInstanceList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Instance `json:"items"`
+	Items           []TestInstance `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&Instance{}, &InstanceList{})
+	SchemeBuilder.Register(&TestInstance{}, &TestInstanceList{})
 }
