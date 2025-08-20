@@ -1,0 +1,12 @@
+apiVersion: meta.pkg.crossplane.io/v1
+kind: Configuration
+metadata:
+  name: synapse-tenancy
+spec:
+  crossplane:
+    version: ">=v2.0.0"
+  dependsOn:
+    - provider: xpkg.upbound.io/crossplane-contrib/provider-kubernetes
+      version: v1.0.0
+    - function: ghcr.io/mdaops/synapse-fn-tenant
+      version: "v1.0.0"
