@@ -30,24 +30,21 @@ echo ""
 echo "Building crossplane package..."
 cd .syn
 
-crossplane xpkg build --package-root=. --package-file=../tenancy-config.xpkg
+crossplane xpkg build --package-root=. --package-file=../synapse-tenancy.xpkg
 
 cd ..
 
-echo "✅ Package built successfully: tenancy-config.xpkg"
+echo "✅ Package built successfully: synapse-tenancy.xpkg"
 
-# Push the package
-echo ""
 echo "Pushing package to registry..."
 
-# Default registry and tag - you can modify these
 REGISTRY="ghcr.io/mdaops"
 PACKAGE_NAME="synapse-tenancy"
-VERSION=${1:-"latest"}  # Use first argument as version, default to "latest"
+VERSION=${1:-"latest"}
 
 FULL_PACKAGE_NAME="${REGISTRY}/${PACKAGE_NAME}:${VERSION}"
 
-crossplane xpkg push ${FULL_PACKAGE_NAME} -f tenancy-config.xpkg
+crossplane xpkg push ${FULL_PACKAGE_NAME} -f synapse-tenancy.xpkg
 
 echo "✅ Package pushed successfully to: ${FULL_PACKAGE_NAME}"
 echo ""
